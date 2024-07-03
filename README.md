@@ -2,7 +2,7 @@
 # PlayerChangeArmorEvent
 Adds the PlayerChangeArmorEvent from paper into spigot/bukkit servers. **Keep in mind** that due to the way packets are handled with servers, canceling this event for players in creative mode can have strange buggy effects.
 
-[![](https://jitpack.io/v/jewishbanana/PlayerArmorChangeEvent.svg)](https://jitpack.io/#jewishbanana/PlayerArmorChangeEvent)
+[![](https://jitpack.io/v/JewishBanana/PlayerChangeArmorEvent.svg)](https://jitpack.io/#JewishBanana/PlayerChangeArmorEvent)
 
 ## How To Add
 
