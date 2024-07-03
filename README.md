@@ -2,7 +2,7 @@
 # PlayerChangeArmorEvent
 Adds the PlayerChangeArmorEvent from paper into spigot/bukkit servers. **Keep in mind** that due to the way packets are handled with servers, canceling this event for players in creative mode can have strange buggy effects.
 
-
+[![](https://jitpack.io/v/jewishbanana/PlayerArmorChangeEvent.svg)](https://jitpack.io/#jewishbanana/PlayerArmorChangeEvent)
 
 ## How To Add
 
@@ -21,8 +21,8 @@ Next add this repo as a dependency to your pom.xml:
 <dependencies>
 	<dependency>
 		<groupId>com.github.jewishbanana</groupId>
-		<artifactId>playerarmorchangeevent</artifactId>
-		<version>1.0.0</version>
+		<artifactId>PlayerChangeArmorEvent</artifactId>
+		<version>1.0.1</version>
 		<scope>compile</scope>
 	</dependency>
 </dependencies>
