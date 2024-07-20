@@ -42,7 +42,7 @@ public class PlayerArmorListener implements Listener {
     }
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (event.isCancelled() || !(event.getWhoClicked() instanceof Player))
+        if (event.isCancelled() || event.getClickedInventory() == null || !(event.getWhoClicked() instanceof Player))
             return;
         if (event.getAction() == InventoryAction.SWAP_WITH_CURSOR && event.getSlotType() == SlotType.ARMOR) {
             if (isNotNullOrAir(event.getCurrentItem()) && isNotNullOrAir(event.getCursor())) {
