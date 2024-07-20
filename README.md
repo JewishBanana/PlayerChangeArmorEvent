@@ -22,7 +22,7 @@ Next add this repo as a dependency to your pom.xml:
 	<dependency>
 		<groupId>com.github.jewishbanana</groupId>
 		<artifactId>PlayerChangeArmorEvent</artifactId>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 		<scope>compile</scope>
 	</dependency>
 </dependencies>
