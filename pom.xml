@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.jewishbanana</groupId>
   <artifactId>playerarmorchangeevent</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <name>PlayerArmorChangeEvent</name>
   <description>Adds the paper PlayerArmorChangeEvent to spigot/bukkit servers</description>
   

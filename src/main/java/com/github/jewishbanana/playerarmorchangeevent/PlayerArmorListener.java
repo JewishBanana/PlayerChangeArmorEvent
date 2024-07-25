@@ -1,5 +1,7 @@
 package com.github.jewishbanana.playerarmorchangeevent;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,11 +22,13 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockDispenseArmorEvent;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -56,7 +60,7 @@ public class PlayerArmorListener implements Listener {
             }
             return;
         }
-        if (event.getClickedInventory().getType() == InventoryType.PLAYER && event.getView().getTopInventory() != null && event.getView().getTopInventory().getType() == InventoryType.CRAFTING) {
+        if (event.getClickedInventory().getType() == InventoryType.PLAYER && getTopInventoryType(event) == InventoryType.CRAFTING) {
             if (event.getSlot() > 35 && event.getSlot() < 40) {
                 if (pickUpActions.contains(event.getAction()) && isNotNullOrAir(event.getCurrentItem())) {
                     PlayerArmorChangeEvent armorEvent = new PlayerArmorChangeEvent((Player) event.getWhoClicked(), event.getCurrentItem().getType().getEquipmentSlot(), event.getCurrentItem(), new ItemStack(Material.AIR), Reason.INVENTORY_ACTION);
@@ -149,6 +153,17 @@ public class PlayerArmorListener implements Listener {
             return true;
         default:
             return true;
+        }
+    }
+    private InventoryType getTopInventoryType(InventoryEvent event) {
+        try {
+            Object view = event.getView();
+            Method getTopInventory = view.getClass().getMethod("getTopInventory");
+            getTopInventory.setAccessible(true);
+            Inventory inv = (Inventory) getTopInventory.invoke(view);
+            return inv == null ? null : inv.getType();
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 }
