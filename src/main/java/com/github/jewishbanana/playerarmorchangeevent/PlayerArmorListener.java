@@ -81,7 +81,7 @@ public class PlayerArmorListener implements Listener {
                 }
             } else if (event.isShiftClick() && isNotNullOrAir(event.getCurrentItem())) {
                 EquipmentSlot slot = event.getCurrentItem().getType().getEquipmentSlot();
-                if (!isNotNullOrAir(((Player) event.getWhoClicked()).getEquipment().getItem(slot))) {
+                if (!slot.toString().equals("BODY") && !isNotNullOrAir(((Player) event.getWhoClicked()).getEquipment().getItem(slot))) {
                     PlayerArmorChangeEvent armorEvent = new PlayerArmorChangeEvent((Player) event.getWhoClicked(), slot, new ItemStack(Material.AIR), event.getCurrentItem(), Reason.INVENTORY_ACTION);
                     Bukkit.getPluginManager().callEvent(armorEvent);
                     if (armorEvent.isCancelled())
@@ -121,6 +121,9 @@ public class PlayerArmorListener implements Listener {
     public void onItemDamage(PlayerItemDamageEvent event) {
         if (event.isCancelled() || ((Damageable) event.getItem().getItemMeta()).getDamage()+event.getDamage() < event.getItem().getType().getMaxDurability())
             return;
+        EquipmentSlot slot = event.getItem().getType().getEquipmentSlot();
+        if (!armorSlots.contains(slot) || !event.getPlayer().getInventory().getItem(slot).equals(event.getItem()))
+        	return;
         PlayerArmorChangeEvent armorEvent = new PlayerArmorChangeEvent(event.getPlayer(), event.getItem().getType().getEquipmentSlot(), event.getItem(), new ItemStack(Material.AIR), Reason.ITEM_BREAK);
         Bukkit.getPluginManager().callEvent(armorEvent);
         if (armorEvent.isCancelled())
