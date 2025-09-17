@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.jewishbanana</groupId>
   <artifactId>playerarmorchangeevent</artifactId>
-  <version>1.0.4</version>
+  <version>1.1.0</version>
   <name>PlayerArmorChangeEvent</name>
   <description>Adds the paper PlayerArmorChangeEvent to spigot/bukkit servers</description>
   
@@ -25,6 +25,11 @@
 			<artifactId>spigot-api</artifactId>
 			<version>1.17-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+    		<groupId>org.jetbrains</groupId>
+    		<artifactId>annotations</artifactId>
+    		<version>24.0.1</version>
 		</dependency>
 	</dependencies>
 </project>
