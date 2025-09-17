@@ -2,8 +2,8 @@ package com.github.jewishbanana.playerarmorchangeevent;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -11,34 +11,26 @@ import org.jetbrains.annotations.NotNull;
 /**
  * This event is called when a player changes their armor. This event mimics the paper version and is a substitute for spigot/bukkit compatibility on servers.
  * <br><br>
- * <STRONG>Keep in mind that this event is only fired when vanilla mechanics change armor (e.g. inventory clicks, armor breaking, etc.) 
- * Armor that is changed or modified by third party plugins will not fire this event!</STRONG>
+ * Keep in mind that this event is only fired when vanilla mechanics change armor (e.g. inventory clicks, armor breaking, etc.)
+ * <br><br>
+ * <STRONG>Armor that is changed or modified by third party plugins will not fire this event!</STRONG>
  */
-public class PlayerArmorChangeEvent extends Event implements Cancellable {
+public class PlayerArmorChangeEvent extends PlayerEvent implements Cancellable {
    
     private static final HandlerList handlers = new HandlerList();
    
     private boolean cancelled;
-    private Player player;
     private ItemStack oldItem;
     private ItemStack newItem;
     private EquipmentSlot slot;
     private Reason reason;
 
     public PlayerArmorChangeEvent(@NotNull Player player, EquipmentSlot slot, @NotNull ItemStack oldItem, @NotNull ItemStack newItem, Reason reason) {
-        this.player = player;
+        super(player);
         this.slot = slot;
         this.oldItem = oldItem;
         this.newItem = newItem;
         this.reason = reason;
-    }
-    /**
-     * Gets the player that is changing their armor
-     * 
-     * @return The involved player in this event
-     */
-    public @NotNull Player getPlayer() {
-        return player;
     }
     /**
      * Gets the item that is currently equipped on the player in the armor slot that is being changed. If no armor is present this will return an AIR itemstack.
